@@ -1,0 +1,22 @@
+{
+  "name": "hello-react",
+  "version": "1.0.0",
+  "description": "Simple react app from tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjs2b/tutorials.git"
+  },
+  "author": "Andrew Mead",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kjs2b/tutorials/issues"
+  },
+  "homepage": "https://github.com/kjs2b/tutorials#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}

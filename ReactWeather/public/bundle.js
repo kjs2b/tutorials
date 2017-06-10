@@ -24933,7 +24933,26 @@
 	var Weather = React.createClass({
 	  displayName: 'Weather',
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      location: 'Miami',
+	      temp: 88
+	    };
+	  },
+
+	  handleSearch: function handleSearch(location) {
+	    this.setState({
+	      location: location,
+	      temp: 23
+	    });
+	  },
+
 	  render: function render() {
+	    var _state = this.state,
+	        temp = _state.temp,
+	        location = _state.location;
+
+
 	    return React.createElement(
 	      'div',
 	      null,
@@ -24942,8 +24961,8 @@
 	        null,
 	        'Get Weather'
 	      ),
-	      React.createElement(WeatherForm, null),
-	      React.createElement(WeatherMessage, null)
+	      React.createElement(WeatherForm, { onSearch: this.handleSearch }),
+	      React.createElement(WeatherMessage, { location: location, temp: temp })
 	    );
 	  }
 	});
@@ -24961,14 +24980,25 @@
 	var WeatherForm = React.createClass({
 	  displayName: 'WeatherForm',
 
+	  onFormSubmit: function onFormSubmit(e) {
+	    e.preventDefault();
+
+	    var location = this.refs.location.value;
+
+	    if (location) {
+	      this.refs.location.value = '';
+	      this.props.onSearch(location);
+	    }
+	  },
+
 	  render: function render() {
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(
 	        'form',
-	        null,
-	        React.createElement('input', { type: 'text' }),
+	        { onSubmit: this.onFormSubmit },
+	        React.createElement('input', { type: 'text', ref: 'location' }),
 	        React.createElement('br', null),
 	        React.createElement(
 	          'button',
@@ -24994,13 +25024,22 @@
 	  displayName: 'WeatherMessage',
 
 	  render: function render() {
+	    var _props = this.props,
+	        temp = _props.temp,
+	        location = _props.location;
+
+
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(
 	        'p',
 	        null,
-	        'The weather is ___ in _____'
+	        'The weather is ',
+	        temp,
+	        ' in ',
+	        location,
+	        '.'
 	      )
 	    );
 	  }
